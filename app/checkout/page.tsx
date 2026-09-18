@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { ArrowLeft, Check, CreditCard, QrCode, ReceiptText, ShieldCheck } from "lucide-react";
 import { gifts } from "@/lib/gifts";
 
 const money = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-export default function Checkout() {
+function CheckoutContent() {
   const params = useSearchParams();
   const gift = gifts.find(item => item.id === params.get("giftId"));
   const amount = Number(params.get("value") || gift?.price || 0);
@@ -43,4 +43,8 @@ export default function Checkout() {
       <aside className="order-summary"><p className="eyebrow">resumo do presente</p>{gift && <div className="summary-image" style={{ backgroundImage: `url(${gift.imageUrl})` }}/>}<h2>{name}</h2><div className="summary-line"><span>Total</span><strong>{money(amount)}</strong></div><p className="summary-demo">Modo demonstração · nenhuma cobrança será realizada</p></aside>
     </div>
   </main>;
+}
+
+export default function Checkout() {
+  return <Suspense fallback={<main className="checkout-page"><p>Carregando checkout…</p></main>}><CheckoutContent /></Suspense>;
 }
