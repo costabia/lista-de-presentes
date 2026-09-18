@@ -1,0 +1,14 @@
+import type { Gift } from "@/types/gift";
+const photo = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=85`;
+export const gifts: Gift[] = [
+ {id:"breakfast",slug:"cafe-da-manha",name:"Café da manhã dos recém-casados",description:"Para começar um dia sem pressa.",price:80,imageUrl:photo("photo-1498837167922-ddd27525d352"),alt:"Café da manhã servido em uma mesa",category:"gastronomia",active:true,purchaseCount:0},
+ {id:"drinks",slug:"drinks-na-lua-de-mel",name:"Drinks na lua de mel",description:"Um brinde aos nossos dias juntos.",price:120,imageUrl:photo("photo-1551024709-8f23befc6f87"),alt:"Drinks coloridos em uma mesa",category:"lua-de-mel",active:true,purchaseCount:0},
+ {id:"dinner",slug:"jantar-romantico",name:"Jantar romântico",description:"Uma noite para guardar na memória.",price:250,imageUrl:photo("photo-1515003197210-e0cd71810b5f"),alt:"Mesa posta para um jantar",category:"gastronomia",active:true,purchaseCount:0},
+ {id:"massage",slug:"massagem-para-o-casal",name:"Massagem para o casal",description:"Pausa, cuidado e tranquilidade.",price:300,imageUrl:photo("photo-1540555700478-4be289fbecef"),alt:"Ambiente de spa",category:"bem-estar",active:true,purchaseCount:0},
+ {id:"special-tour",slug:"passeio-especial",name:"Passeio especial",description:"Para descobrir um lugar novo.",price:400,imageUrl:photo("photo-1500534623283-312aade485b7"),alt:"Paisagem de uma viagem",category:"lua-de-mel",active:true,purchaseCount:0},
+ {id:"candle-dinner",slug:"jantar-a-luz-de-velas",name:"Jantar à luz de velas",description:"Com sabor e uma pitada de romance.",price:450,imageUrl:photo("photo-1414235077428-338989a2e8c0"),alt:"Jantar à luz de velas",category:"gastronomia",active:true,purchaseCount:0},
+ {id:"special-night",slug:"uma-noite-especial",name:"Uma noite especial da lua de mel",description:"Uma hospedagem para celebrar.",price:600,imageUrl:photo("photo-1566073771259-6a8506099945"),alt:"Quarto de hotel elegante",category:"lua-de-mel",active:true,purchaseCount:0},
+ {id:"boat",slug:"passeio-de-barco",name:"Passeio de barco",description:"Mar, sol e novos horizontes.",price:750,imageUrl:photo("photo-1544551763-46a013bb70d5"),alt:"Barco em mar azul",category:"lua-de-mel",active:true,purchaseCount:0},
+ {id:"flights",slug:"ajuda-com-as-passagens",name:"Ajuda com as passagens",description:"Para nos levar até nosso próximo destino.",price:1000,imageUrl:photo("photo-1436491865332-7a61a109cc05"),alt:"Avião visto do céu",category:"viagem",active:true,purchaseCount:0},
+ {id:"surprise",slug:"experiencia-surpresa",name:"Experiência surpresa",description:"Uma história que ainda vamos descobrir.",price:1500,imageUrl:photo("photo-1507525428034-b723cf961d3e"),alt:"Praia paradisíaca",category:"viagem",active:true,maxPurchases:1,purchaseCount:0},
+];

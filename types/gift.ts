@@ -1,0 +1,1 @@
+export type Gift = { id: string; slug: string; name: string; description: string; imageUrl: string; alt: string; price: number; category: string; active: boolean; maxPurchases?: number; purchaseCount: number };

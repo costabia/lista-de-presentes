@@ -1,0 +1,478 @@
+20:00:30 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+
+20:01:22 [vite] (rsc) warning: client component dependency is inconsistently optimized. It's recommended to add the dependency to 'optimizeDeps.exclude'.
+  Plugin: rsc:use-client
+  File: C:/Users/nairm/Documents/ChatGPT/lista-de-presentes/node_modules/vinext/dist/shims/internal/app-prefetch-fetch-queue.js?v=acdc992a
+20:04:11 [vite] Internal server error: fetch failed
+      at Object.processResponse (C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\undici\lib\web\fetch\index.js:237:16)
+      at C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\undici\lib\web\fetch\index.js:1081:19
+      at node:internal/process/task_queues:149:7
+      at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+      at AsyncResource.runMicrotask (node:internal/process/task_queues:146:8)
+      at C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\undici\index.js:157:7
+      at async fetch5 (C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\miniflare\dist\src\index.js:59000:20)
+      at async _Miniflare.dispatchFetch (C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\miniflare\dist\src\index.js:89442:22)
+      at async file:///C:/Users/nairm/Documents/ChatGPT/lista-de-presentes/node_modules/@cloudflare/vite-plugin/dist/index.mjs:34226:19
+20:04:13 [vite] (client) [console.error] [vite] Internal Server Error
+fetch failed
+    at Object.processResponse (C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\undici\lib\web\fetch\index.js:237:16)
+    at C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\undici\lib\web\fetch\index.js:1081:19
+    at node:internal/process/task_queues:149:7
+    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+    at AsyncResource.runMicrotask (node:internal/process/task_queues:146:8)
+    at C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\undici\index.js:157:7
+    at async fetch5 (C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\miniflare\dist\src\index.js:59000:20)
+    at async _Miniflare.dispatchFetch (C:\Users\nairm\Documents\ChatGPT\lista-de-presentes\node_modules\miniflare\dist\src\index.js:89442:22)
+    at async file:///C:/Users/nairm/Documents/ChatGPT/lista-de-presentes/node_modules/@cloudflare/vite-plugin/dist/index.mjs:34226:19
+20:04:19 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+
+20:04:27 [vite] (rsc) warning: client component dependency is inconsistently optimized. It's recommended to add the dependency to 'optimizeDeps.exclude'.
+  Plugin: rsc:use-client
+  File: C:/Users/nairm/Documents/ChatGPT/lista-de-presentes/node_modules/vinext/dist/shims/internal/app-prefetch-fetch-queue.js?v=460b4d28
+20:08:24 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+
+20:10:15 [vite] (rsc) warning: client component dependency is inconsistently optimized. It's recommended to add the dependency to 'optimizeDeps.exclude'.
+  Plugin: rsc:use-client
+  File: C:/Users/nairm/Documents/ChatGPT/lista-de-presentes/node_modules/vinext/dist/shims/internal/app-prefetch-fetch-queue.js?v=460b4d28
+[orders] could not save order [Error: internal error; reference = 1kvlp0or49k4hsktuo0639p9] {
+  remote: true
+}
+[orders] could not update order [Error: internal error; reference = s8uteg8j7r56upta2rtl8f6e] {
+  remote: true
+}
+[orders] could not save order [Error: internal error; reference = 2bgb1l9ev5gb2tcgpetgsrc3] {
+  remote: true
+}
+[orders] could not update order [Error: internal error; reference = 18svfevaobrtnjdkujc0q62l] {
+  remote: true
+}
+[orders] could not save order [Error: internal error; reference = nad09njkoav95j96rui06jat] {
+  remote: true
+}
+[orders] could not update order [Error: internal error; reference = 81rlvbssrblou9vvbinjrd8p] {
+  remote: true
+}
+20:11:10 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <AwaitAppRenderDependencies>
+      <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+        <ErrorBoundaryInner pathname="/presentes..." fallback={function DefaultGlobalError} ...>
+          <ErrorBoundary fallback={function DefaultGlobalError}>
+            <ErrorBoundaryInner pathname="/presentes..." resetKey={undefined} fallback={function DefaultGlobalError}>
+              <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+                <Slot id="layout:/">
+                  <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                    <link>
+                    <RemoveDuplicateServerCss>
+                    <AwaitAppRenderDependencies>
+                      <AppComponentDependencyBarrier>
+                        <RootLayout>
+                          <html lang="pt-BR">
+                            <body
+                              className="antialiased"
+-                             cz-shortcut-listen="true"
+                            >
+
+20:13:02 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <AwaitAppRenderDependencies>
+      <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+        <ErrorBoundaryInner pathname="/presentes..." fallback={function DefaultGlobalError} ...>
+          <ErrorBoundary fallback={function DefaultGlobalError}>
+            <ErrorBoundaryInner pathname="/presentes..." resetKey={undefined} fallback={function DefaultGlobalError}>
+              <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+                <Slot id="layout:/">
+                  <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                    <link>
+                    <RemoveDuplicateServerCss>
+                    <AwaitAppRenderDependencies>
+                      <AppComponentDependencyBarrier>
+                        <RootLayout>
+                          <html lang="pt-BR">
+                            <body
+                              className="antialiased"
+-                             cz-shortcut-listen="true"
+                            >
+
+20:13:06 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+
+[orders] could not save order [Error: internal error; reference = 7ffnvhdi9jh3udp5ndksaf20] {
+  remote: true
+}
+[orders] could not update order [Error: internal error; reference = q6ts7lhkn7p39h7krgm1ulrp] {
+  remote: true
+}
+20:13:14 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <AwaitAppRenderDependencies>
+      <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+        <ErrorBoundaryInner pathname="/presentes..." fallback={function DefaultGlobalError} ...>
+          <ErrorBoundary fallback={function DefaultGlobalError}>
+            <ErrorBoundaryInner pathname="/presentes..." resetKey={undefined} fallback={function DefaultGlobalError}>
+              <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+                <Slot id="layout:/">
+                  <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                    <link>
+                    <RemoveDuplicateServerCss>
+                    <AwaitAppRenderDependencies>
+                      <AppComponentDependencyBarrier>
+                        <RootLayout>
+                          <html lang="pt-BR">
+                            <body
+                              className="antialiased"
+-                             cz-shortcut-listen="true"
+                            >
+
+20:17:56 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+
+[orders] could not save order [Error: internal error; reference = avugmuq8aefgjgolt4371nl8] {
+  remote: true
+}
+[orders] could not update order [Error: internal error; reference = 5mpgh1gdj6pg2cgq4qsb7mn6] {
+  remote: true
+}
+20:18:05 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/checkout" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/checkout" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+
+Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+20:42:49 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/checkout" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/checkout" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+
+20:42:54 [vite] (client) [console.error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <meta>
+    <title>
+    <meta>
+    <link>
+    <link>
+    <meta>
+    <meta>
+    <GlobalErrorBoundary fallback={function DefaultGlobalError}>
+      <ErrorBoundaryInner pathname="/" fallback={function DefaultGlobalError} isImplicitRootErrorBoundary={true}>
+        <ErrorBoundary fallback={function DefaultGlobalError}>
+          <ErrorBoundaryInner pathname="/" resetKey={undefined} fallback={function DefaultGlobalError}>
+            <LayoutSegmentProvider providerId="layout:/" segmentMap={{children:[...]}}>
+              <Slot id="layout:/">
+                <BfcacheSlotBoundary id="layout:/" content={<Context>}>
+                  <link>
+                  <RemoveDuplicateServerCss>
+                  <AppComponentDependencyBarrier>
+                    <RootLayout>
+                      <html lang="pt-BR">
+                        <body
+                          className="antialiased"
+-                         cz-shortcut-listen="true"
+                        >
+

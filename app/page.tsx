@@ -1,0 +1,34 @@
+"use client";
+import Image from "next/image";
+import { useMemo, useState } from "react";
+import { X, ArrowUpRight, Heart, Check, LoaderCircle } from "lucide-react";
+import { gifts } from "@/lib/gifts";
+import { wedding } from "@/config/wedding";
+import type { Gift } from "@/types/gift";
+
+const filters = ["Todos", "Até R$ 200", "R$ 200–500", "R$ 500–1.000", "Acima de R$ 1.000"];
+const money = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const matches = (p: number, f: string) => f === "Até R$ 200" ? p <= 200 : f === "R$ 200–500" ? p > 200 && p <= 500 : f === "R$ 500–1.000" ? p > 500 && p <= 1000 : f === "Acima de R$ 1.000" ? p > 1000 : true;
+const parseAmount = (value: string) => {
+  const raw = value.trim().replace(/R\$\s?/i, "");
+  const normalized = raw.includes(",") ? raw.replace(/\./g, "").replace(",", ".") : raw;
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) ? Math.round(parsed * 100) / 100 : 0;
+};
+
+export default function Home() {
+  const [filter, setFilter] = useState("Todos"), [selected, setSelected] = useState<Gift | null>(null), [custom, setCustom] = useState(false), [guestName, setGuestName] = useState(""), [message, setMessage] = useState(""), [customValue, setCustomValue] = useState(""), [loading, setLoading] = useState(false), [error, setError] = useState("");
+  const visible = useMemo(() => gifts.filter(g => matches(g.price, filter)), [filter]);
+  const amount = selected?.price ?? parseAmount(customValue);
+  async function pay() { if (!selected && (!amount || amount < wedding.minimumCustomGift)) { setError(`Escolha um valor a partir de ${money(wedding.minimumCustomGift)}.`); return; } setLoading(true); setError(""); try { const r = await fetch("/api/payments/link", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ giftId:selected?.id, customAmount:selected ? undefined : amount, guestName, message }) }); const d = await r.json(); if (!r.ok || !d.url) throw new Error(r.status === 503 ? "payment_unavailable" : "invalid_request"); window.location.href = d.url; } catch (error) { setError(error instanceof Error && error.message === "payment_unavailable" ? "O pagamento está temporariamente indisponível. Verifique a configuração do Asaas." : "Não foi possível iniciar o pagamento. Tente novamente."); setLoading(false); } }
+  const close = () => { if (!loading) { setSelected(null); setCustom(false); setError(""); } };
+  return <main className="site-shell">
+    <header className="topbar"><a href="#top" className="monogram" aria-label="Início">M <span>&</span> G</a><nav><a href="#presentes">A lista</a><a href="#sobre">Sobre o presente</a></nav><span className="date">14.09.2025</span></header>
+    <section id="top" className="hero"><div className="hero-kicker"><span className="line" /> lista de presentes <span className="line" /></div><h1>Para celebrar<br/><em>juntos.</em></h1><p className="hero-copy">Mais do que presentes, queremos colecionar experiências e memórias ao lado de vocês.</p><a className="scroll-cue" href="#presentes">explorar a lista <ArrowUpRight size={16}/></a><div className="hero-mark">♡</div></section>
+    <section id="sobre" className="intro"><p className="eyebrow">um gesto, uma memória</p><p>Os presentes desta lista são simbólicos. Cada escolha se transforma em um momento da nossa lua de mel e em uma lembrança muito especial desse capítulo. Obrigada por fazerem parte.</p></section>
+    <section id="presentes" className="gifts-section"><div className="section-heading"><div><p className="eyebrow">com carinho, <span>para nós</span></p><h2>Escolha uma experiência</h2></div><p className="count">{String(visible.length).padStart(2,"0")} presentes</p></div><div className="filters" role="tablist">{filters.map(f => <button key={f} className={filter===f ? "active" : ""} onClick={()=>setFilter(f)} role="tab" aria-selected={filter===f}>{f}</button>)}</div><div className="gift-grid">{visible.map((gift,i)=><article key={gift.id} className={`gift-card ${i===0?"featured":""}`}><button className="gift-image" onClick={()=>setSelected(gift)} aria-label={`Escolher ${gift.name}`}><Image src={gift.imageUrl} alt={gift.alt} fill sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 33vw" priority={i<3}/></button><div className="gift-info"><h3>{gift.name}</h3><p>{gift.description}</p><div className="gift-bottom"><strong>{money(gift.price)}</strong><button onClick={()=>setSelected(gift)} className="present-button" disabled={gift.maxPurchases===1 && gift.purchaseCount>=1}>{gift.maxPurchases===1&&gift.purchaseCount>=1?< >Presenteado <Heart size={13} fill="currentColor"/></>:<>Presentear <ArrowUpRight size={15}/></>}</button></div></div></article>)}</div></section>
+    <section className="custom-section"><div><p className="eyebrow">do seu jeito</p><h2>Prefere escolher<br/><em>o valor?</em></h2></div><div className="custom-action"><p>Uma contribuição também se transforma em uma memória inesquecível.</p><button onClick={()=>{setCustom(true);setSelected(null);setError("")}}>Presentear este valor <ArrowUpRight size={16}/></button></div></section>
+    <footer><div className="monogram">M <span>&</span> G</div><p>Com amor, Marina & Gabriel</p><p className="footer-note">Pagamento processado com segurança pelo Asaas</p></footer>
+    {(selected||custom)&&<div className="modal-backdrop" onMouseDown={e=>e.target===e.currentTarget&&close()}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="close" onClick={close} aria-label="Fechar"><X size={20}/></button>{selected&&<div className="modal-image"><Image src={selected.imageUrl} alt="" fill sizes="180px"/></div>}<p className="eyebrow">seu presente</p><h2 id="modal-title">{selected?.name??"Uma contribuição especial"}</h2>{custom&&<label className="field"><span>Valor da contribuição</span><input autoFocus inputMode="decimal" placeholder="R$ 0,00" value={customValue} onChange={e=>setCustomValue(e.target.value)}/></label>}{selected&&<p className="modal-price">{money(selected.price)}</p>}<label className="field"><span>Seu nome <small>(opcional)</small></span><input value={guestName} onChange={e=>setGuestName(e.target.value)} placeholder="Como podemos agradecer?"/></label><label className="field"><span>Mensagem <small>(opcional)</small></span><textarea value={message} onChange={e=>setMessage(e.target.value)} placeholder="Deixe uma mensagem para os noivos" rows={3}/></label>{error&&<p className="form-error" role="alert">{error}</p>}<button className="modal-submit" onClick={pay} disabled={loading}>{loading?<><LoaderCircle className="spin" size={16}/> Preparando pagamento…</>:<>Continuar para o pagamento <ArrowUpRight size={16}/></>}</button><p className="secure"><Check size={13}/> Pagamento processado com segurança pelo Asaas.</p></section></div>}
+  </main>;
+}
