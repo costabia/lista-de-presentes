@@ -21,7 +21,7 @@ export async function createPaymentLink(input:{ name:string; description:string;
     const params = new URLSearchParams({ demo: "1", name: input.name, value: String(input.value), ...(input.giftId ? { giftId: input.giftId } : {}) });
     return { id: "demo", url: `${siteUrl}/checkout?${params.toString()}` };
   }
-  const response = await fetch(`${apiUrl}/v3/paymentLinks`, { method:"POST", headers:{ access_token:key, "Content-Type":"application/json" }, body:JSON.stringify({ name:input.name, description:input.description, value:input.value, billingType:"UNDEFINED", chargeType:"DETACHED", externalReference:input.externalReference, notificationEnabled:false, callback:{ successUrl:`${siteUrl}/presentes/obrigado?reference=${encodeURIComponent(input.externalReference)}`, autoRedirect:true } }) });
+  const response = await fetch(`${apiUrl}/v3/paymentLinks`, { method:"POST", headers:{ access_token:key, "Content-Type":"application/json" }, body:JSON.stringify({ name:input.name, description:input.description, value:input.value, billingType:"UNDEFINED", chargeType:"DETACHED", dueDateLimitDays:7, externalReference:input.externalReference, notificationEnabled:false, callback:{ successUrl:`${siteUrl}/presentes/obrigado?reference=${encodeURIComponent(input.externalReference)}`, autoRedirect:true } }) });
   if (!response.ok) {
     const details = await response.text();
     throw new Error(`Asaas payment link failed: ${response.status} ${details}`);
