@@ -13,7 +13,8 @@ function CheckoutContent() {
   const amount = Number(params.get("value") || gift?.price || 0);
   const name = params.get("name") || "Contribuição para Marina & Gabriel";
   const [method, setMethod] = useState("pix");
-  const [submitted, setSubmitted] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [error, setError] = useState("");
 
   if (!amount) return <main className="checkout-page"><p>Não foi possível carregar este checkout.</p><Link href="/">Voltar para a lista</Link></main>;
 
@@ -35,12 +36,23 @@ function CheckoutContent() {
           {method === "card" && <><h2>Dados do cartão</h2><label>Número do cartão<input placeholder="0000 0000 0000 0000" inputMode="numeric"/></label><div className="field-row"><label>Validade<input placeholder="MM/AA"/></label><label>CVV<input placeholder="000"/></label></div><label>Nome impresso no cartão<input placeholder="Como está no cartão"/></label></>}
           {method === "boleto" && <><h2>Dados para o boleto</h2><p>O boleto será gerado na próxima etapa e enviado para você.</p><label>Seu CPF<input placeholder="000.000.000-00" inputMode="numeric"/></label></>}
         </div>
-        {submitted && <p className="demo-notice"><Check size={15}/> Demonstração concluída. Nenhuma cobrança foi realizada.</p>}
-        <button className="checkout-submit" onClick={() => setSubmitted(true)}>{submitted ? "Pagamento concluído" : `Continuar com ${method === "pix" ? "Pix" : method === "card" ? "cartão" : "boleto"}`} <span>→</span></button>
-        {submitted && <Link className="confirmation-link" href="/presentes/obrigado?demo=1">Ver confirmação <span>↗</span></Link>}
+        {error && <p className="demo-notice"><span>{error}</span></p>}
+        <button className="checkout-submit" disabled={creating} onClick={async () => {
+          setCreating(true);
+          setError("");
+          try {
+            const response = await fetch("/api/payments/link", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ giftId:gift?.id, customAmount:gift ? undefined : amount }) });
+            const result = await response.json() as { url?:string; error?:string; requestId?:string };
+            if (!response.ok || !result.url) throw new Error(result.requestId ? `Não foi possível criar o pagamento. Código: ${result.requestId}` : "Não foi possível criar o pagamento.");
+            window.location.assign(result.url);
+          } catch (reason) {
+            setError(reason instanceof Error ? reason.message : "Não foi possível criar o pagamento.");
+            setCreating(false);
+          }
+        }}>{creating ? "Preparando pagamento…" : `Continuar com ${method === "pix" ? "Pix" : method === "card" ? "cartão" : "boleto"}`} <span>→</span></button>
         <p className="checkout-secure"><ShieldCheck size={14}/> Seus dados são protegidos e criptografados.</p>
       </section>
-      <aside className="order-summary"><p className="eyebrow">resumo do presente</p>{gift && <div className="summary-image" style={{ backgroundImage: `url(${gift.imageUrl})` }}/>}<h2>{name}</h2><div className="summary-line"><span>Total</span><strong>{money(amount)}</strong></div><p className="summary-demo">Modo demonstração · nenhuma cobrança será realizada</p></aside>
+      <aside className="order-summary"><p className="eyebrow">resumo do presente</p>{gift && <div className="summary-image" style={{ backgroundImage: `url(${gift.imageUrl})` }}/>}<h2>{name}</h2><div className="summary-line"><span>Total</span><strong>{money(amount)}</strong></div><p className="summary-demo">Pagamento seguro processado pelo Asaas</p></aside>
     </div>
   </main>;
 }

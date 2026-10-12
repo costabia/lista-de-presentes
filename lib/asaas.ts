@@ -11,9 +11,9 @@ const apiUrl = isProductionKey && isSandboxUrl
     ? "https://api-sandbox.asaas.com"
     : configuredApiUrl || (isProductionKey ? "https://api.asaas.com" : "https://api-sandbox.asaas.com");
 
-export async function createPaymentLink(input:{ name:string; description:string; value:number; externalReference:string; giftId?:string }) {
+export async function createPaymentLink(input:{ name:string; description:string; value:number; externalReference:string; giftId?:string; siteUrl?:string }) {
   const key = process.env.ASAAS_API_KEY;
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
+  const siteUrl = (input.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
   if (!key) {
     if (process.env.ALLOW_DEMO_PAYMENTS !== "true") {
       throw new Error("ASAAS_API_KEY is not configured");
