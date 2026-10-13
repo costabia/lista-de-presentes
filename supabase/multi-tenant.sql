@@ -63,6 +63,13 @@ alter table payouts enable row level security;
 alter table wedding_users enable row level security;
 alter table payouts add column if not exists destination_key_ciphertext text;
 
+-- O backend usa a chave SUPABASE_SERVICE_ROLE_KEY através do REST API.
+-- Em projetos onde as tabelas foram criadas por outro role, os grants
+-- explícitos abaixo são necessários mesmo com o RLS habilitado.
+grant usage on schema public to service_role;
+grant select, insert, update, delete on public.weddings, public.asaas_accounts, public.payouts, public.wedding_users, public.gifts, public.gift_orders, public.webhook_events to service_role;
+grant usage, select on all sequences in schema public to service_role;
+
 -- As tabelas de credenciais e saques ficam acessíveis somente pelo backend
 -- usando SUPABASE_SERVICE_ROLE_KEY até a autenticação das noivas ser criada.
 

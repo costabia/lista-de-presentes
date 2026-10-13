@@ -1,4 +1,4 @@
-type Order = { wedding_id:string; gift_id?:string|null; guest_name?:string|null; guest_name_normalized?:string|null; guest_message?:string|null; amount:number; status:string; external_reference:string; asaas_payment_link_id?:string|null; asaas_payment_id?:string|null; paid_at?:string|null };
+type Order = { gift_id?:string|null; guest_name?:string|null; guest_name_normalized?:string|null; guest_message?:string|null; amount:number; status:string; external_reference:string; asaas_payment_link_id?:string|null; asaas_payment_id?:string|null; paid_at?:string|null };
 const endpoint = () => {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
