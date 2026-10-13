@@ -4,14 +4,16 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { ArrowLeft, Check, CreditCard, QrCode, ReceiptText, ShieldCheck } from "lucide-react";
 import { gifts } from "@/lib/gifts";
+import { wedding } from "@/config/wedding";
 
 const money = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const initials = `${wedding.brideName[0] ?? "M"} & ${wedding.groomName[0] ?? "G"}`;
 
 function CheckoutContent() {
   const params = useSearchParams();
   const gift = gifts.find(item => item.id === params.get("giftId"));
   const amount = Number(params.get("value") || gift?.price || 0);
-  const name = params.get("name") || "Contribuição para Marina & Gabriel";
+  const name = params.get("name") || `Contribuição para ${wedding.siteName}`;
   const [method, setMethod] = useState("pix");
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
@@ -19,7 +21,7 @@ function CheckoutContent() {
   if (!amount) return <main className="checkout-page"><p>Não foi possível carregar este checkout.</p><Link href="/">Voltar para a lista</Link></main>;
 
   return <main className="checkout-page">
-    <header className="checkout-header"><Link href="/" className="monogram">M <span>&</span> G</Link><p><ShieldCheck size={14}/> Ambiente seguro</p></header>
+    <header className="checkout-header"><Link href="/" className="monogram">{initials}</Link><p><ShieldCheck size={14}/> Ambiente seguro</p></header>
     <div className="checkout-layout">
       <section className="checkout-form">
         <Link href="/" className="back-link"><ArrowLeft size={15}/> Voltar para a lista</Link>
@@ -41,7 +43,7 @@ function CheckoutContent() {
           setCreating(true);
           setError("");
           try {
-            const response = await fetch("/api/payments/link", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ giftId:gift?.id, customAmount:gift ? undefined : amount }) });
+            const response = await fetch("/api/payments/link", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ giftId:gift?.id, customAmount:gift ? undefined : amount, weddingSlug:process.env.NEXT_PUBLIC_WEDDING_SLUG }) });
             const result = await response.json() as { url?:string; error?:string; requestId?:string };
             if (!response.ok || !result.url) throw new Error(result.requestId ? `Não foi possível criar o pagamento. Código: ${result.requestId}` : "Não foi possível criar o pagamento.");
             window.location.assign(result.url);
