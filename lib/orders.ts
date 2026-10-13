@@ -15,14 +15,6 @@ export async function saveOrder(order:Order) {
   const response = await fetch(`${base}/gift_orders`,{method:"POST",headers:headers(),body:JSON.stringify(order)});
   if (!response.ok) throw new Error(`Supabase could not save order: ${response.status} ${await response.text()}`);
 }
-export async function getWeddingIdBySlug(slug = process.env.DEFAULT_WEDDING_SLUG || "marina-gabriel") {
-  const base=endpoint();
-  const response=await fetch(`${base}/weddings?slug=eq.${encodeURIComponent(slug)}&select=id&limit=1`,{headers:headers()});
-  if (!response.ok) throw new Error(`Supabase could not find wedding: ${response.status} ${await response.text()}`);
-  const rows=await response.json() as Array<{id:string}>;
-  if (!rows[0]?.id) throw new Error(`Wedding not configured: ${slug}`);
-  return rows[0].id;
-}
 export async function updateOrderByReference(reference:string, patch:Partial<Order>) {
   const base=endpoint();
   const response = await fetch(`${base}/gift_orders?external_reference=eq.${encodeURIComponent(reference)}`,{method:"PATCH",headers:headers(),body:JSON.stringify(patch)});
